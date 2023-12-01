@@ -1,0 +1,28 @@
+#!/usr/bin/env perl -w
+
+use strict;
+
+my $sum = 0;
+
+while (<>) {
+    chomp;
+    my $parsed = "";
+    while (length($_)) {
+        if (m/^one/) { $parsed .= 1; }
+        elsif (m/^two/) { $parsed .= 2; }
+        elsif (m/^three/) { $parsed .= 3; }
+        elsif (m/^four/) { $parsed .= 4; }
+        elsif (m/^five/) { $parsed .= 5; }
+        elsif (m/^six/) { $parsed .= 6; }
+        elsif (m/^seven/) { $parsed .= 7; }
+        elsif (m/^eight/) { $parsed .= 8; }
+        elsif (m/^nine/) { $parsed .= 9; }
+        elsif (m/^(\d)/) { $parsed .= $1; }
+        $_ = substr($_, 1)
+    }
+    $parsed =~ s/^(.)/$1$1/;
+    $parsed =~ s/^(.).*(.)$/$1$2/;
+    $sum += int($parsed);
+}
+
+print "$sum\n";

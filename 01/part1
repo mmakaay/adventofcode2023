@@ -1,0 +1,14 @@
+#!/usr/bin/env perl -w
+
+use strict;
+
+my $sum = 0;
+
+while (<>) {
+    s/\D//g;
+    s/^(.)/$1$1/;
+    s/^(.).*(.)$/$1$2/;
+    $sum += int($_);
+}
+
+print "$sum\n";
