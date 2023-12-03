@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+import sys
+
+
+grid = list(map(str.strip, sys.stdin.readlines()))
+
+
+def is_symbol(char):
+    return not (char.isdigit() or char == ".")
+
+
+def looks_like_part_of_part_no(y, x):
+    return any(
+        is_symbol(char)
+        for row in grid[max(0, y-1):min(y+2, len(grid))]
+        for char in row[max(0, x-1):min(x+2, len(row))]
+    )
+     
+
+sum = 0
+
+for y in range(0, len(grid)):
+    part_no = 0
+    in_part_no = False
+    for x, char in enumerate(grid[y]):
+        if char.isdigit():
+            part_no = 10 * part_no + int(char)
+            in_part_no = in_part_no or looks_like_part_of_part_no(y, x)
+        else:         
+            if in_part_no:
+                sum += part_no
+            part_no = 0
+            in_part_no = False
+    if in_part_no:
+        sum += part_no
+
+print(sum)
+
