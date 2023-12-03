@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+import sys
+G,S,D=sys.stdin.readlines(),0,"0123456789"
+for y in range(0,len(G)):
+ N,I=0,0
+ for x,c in enumerate(G[y]):
+  if c in D:
+   N,I=10*N+int(c),I or any(c not in".\n"+D for r in G[max(0,y-1):min(y+2,len(G))]for c in r[max(0,x-1):min(x+2,len(r))])
+  else:         
+   if I:S+=N
+   N,I=0,0
+print(S)
+
