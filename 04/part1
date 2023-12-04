@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import sys
+
+sum = 0
+
+for line in sys.stdin.readlines():
+    winning, ticket = [
+        set(numbers.split())
+        for numbers in line.split(":")[1].split("|")
+    ]
+    matches = ticket.intersection(winning)
+    if matches:
+        score = 2 ** (len(matches) - 1)
+        sum += score
+
+print(sum)
+
