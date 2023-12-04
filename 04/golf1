@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+import sys
+S=0
+for l in sys.stdin.readlines():
+ W,T=[set(N.split())for N in l.split(":")[1].split("|")]
+ if T&W:S+=2**(len(T&W)-1)
+print(S)

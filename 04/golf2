@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+import sys
+C,i={},0
+for l in sys.stdin.readlines():
+ i+=1;C[i],j,(W,T)=C.get(i,0)+1,i,[set(n.split())for n in l.split(":")[1].split("|")]
+ for m in T&W:j+=1;C[j]=C.get(j,0)+C[i]
+print(sum(C.values()))
