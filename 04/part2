@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import sys
+from collections import defaultdict
+
+card_counts = defaultdict(int)
+
+for nr, line in enumerate(sys.stdin.readlines()):
+    card_counts[nr] += 1
+    winning, ticket = [
+        set(numbers.split())
+        for numbers in line.split(":")[1].split("|")
+    ]
+    matches = ticket.intersection(winning)
+    next_nr = nr
+    for match in matches:
+        next_nr += 1
+        card_counts[next_nr] += card_counts[nr]
+
+print(sum(card_counts.values()))
+
